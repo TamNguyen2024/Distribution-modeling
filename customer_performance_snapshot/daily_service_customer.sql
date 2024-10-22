@@ -28,7 +28,7 @@ JOIN {{ ref('dim_channel') }}  channel
 	ON subchannel.channel_code = channel.channel_code 
 LEFT JOIN {{ ref('dim_ranking') }} ranking 
 	ON customer.ranking_code = ranking.ranking_code 
-LEFT JOIN {{ ref('dim_date_SOL') }} dd
+LEFT JOIN {{ ref('dim_date') }} dd
 	ON visit_plan.d_date = dd.SOL_date 
 WHERE visit_plan.active = '1'
 	AND customer.isactive = '1'

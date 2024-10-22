@@ -19,7 +19,7 @@ WITH cte_sales_settled AS (
 		ON sr.rel_customer_vendor_code = customer_vendor.rel_customer_vendor_code
 	LEFT JOIN {{ ref('dim_customer') }} customer
 		ON customer_vendor.customer_code_sid = customer.customer_code_sid
-	LEFT JOIN {{ ref('dim_date_SOL') }} dd
+	LEFT JOIN {{ ref('dim_date') }} dd
 		ON sr.order_date = dd.d_date 
 ),
 	cte_SOL_cumulative_sr AS (

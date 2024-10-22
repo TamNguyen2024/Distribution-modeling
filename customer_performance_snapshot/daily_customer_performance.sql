@@ -7,7 +7,7 @@ WITH cte_date_descartes_SOL AS (
         dd.d_date,
         dd.SOL_date,
         sol.customer_code
-    FROM {{ ref('dim_date_SOL') }} dd
+    FROM {{ ref('dim_date') }} dd
     LEFT JOIN {{ ref('daily_service_customer') }} sol
 ),
     cte_assessment_set AS (
@@ -23,7 +23,6 @@ WITH cte_date_descartes_SOL AS (
         COALESCE(aol.is_active,0) AS is_active_customer,
         COALESCE(achieve_segment.is_pass_segment,0) AS is_achieve_segment_customer,
         COALESCE(achieve_ranking.is_pass_ranking,0) AS is_achieve_ranking_customer,
-        -- lấy ra MAX của trạng thái (0-1), vì achieve_segment đang dup lên do 1 customer có maximum 4 segment pass trong achieve_segment table
         COALESCE(SUM(achieve_segment.is_achieve_cor),0) AS is_achieve_cor_customer,
         COALESCE(SUM(achieve_segment.is_achieve_reg),0) AS is_achieve_reg_customer,
         COALESCE(SUM(achieve_segment.is_achieve_str),0) AS is_achieve_str_customer,
